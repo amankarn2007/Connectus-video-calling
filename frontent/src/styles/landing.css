@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+}
+
+.landingPageContainer{
+    width: 100vw;
+    height: 100vh;
+    background: url("/back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    
+}
+
+.landingPageContainer nav{
+    padding-inline: 1.2rem;
+    padding-block: 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.landingPageContainer nav h2{
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.landingPageContainer nav .navlist {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.landingMainContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 3rem;
+    height: 80vh;
+    align-items: center;
+}
+
+.landingMainContainer > div:nth-child(1) {
+    font-size: 2rem;
+}
+
+.landingMainContainer > div:nth-child(1) div[role='button']{
+    background: #d97500;
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 20px;
+    margin-top: 1.9rem;
+}
+.landingMainContainer > div:nth-child(1) div[role='button'] a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.landingMainContainer > div:nth-child(1) div[role='button']:hover{
+    background: #feb159;
+}
+
+.landingMainContainer > div:nth-child(2) img {
+    height: 70vh;
+    width: auto;
+}

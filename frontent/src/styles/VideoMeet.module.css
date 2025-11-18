@@ -1,0 +1,180 @@
+/*Main container*/
+.meetVideoContainer{
+    position: relative;
+    height: 100vh;
+    background: rgb(2, 4, 48);
+    overflow: hidden;
+}
+
+.conferenceView {
+    display: grid;
+    gap: 12px;
+    height: 70vh;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 32vw;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.remoteVideoBox {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+}
+.remoteVideoBox video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #222;
+}
+
+/* One video centered */
+.oneVideo {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+.oneVideo .remoteVideoBox {
+    margin-left: 12rem;
+    width: auto;
+    height: 60vh;
+}
+
+/* Two videos side by side */
+.twoVideo {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 20px;
+    margin-left: 13rem;
+    margin-top: 5rem;
+}
+.twoVideo .remoteVideoBox {
+    width: 35vw;
+    height: 50vh;
+}
+
+/* Three videos: 2 top and 1 bottom spanning both columns */
+.threeVideo {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 30vh 30vh;
+    margin-left: 13rem;
+}
+.threeVideo .remoteVideoBox:nth-child(1),
+.threeVideo .remoteVideoBox:nth-child(2) {
+    width: 28vw;
+    height: 39vh;
+    margin-left: 4rem;
+}
+.threeVideo .remoteVideoBox:nth-child(3) {
+    grid-column: span 2;
+    margin-left: 19rem;
+    margin-top: 5rem;
+    width: 28vw;
+    height: 39vh;
+}
+
+/* Four videos 2x2 grid */
+.fourVideo {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    margin-left: 16rem;
+    margin-top: 2rem;
+    gap: 25px;
+}
+.fourVideo .remoteVideoBox {
+    width: 28vw;
+    height: 39vh;
+}
+
+/*Button and LocalVideo at the bottem*/
+.buttonContainer {
+    position: absolute;
+    width: 100%;
+    bottom: 1rem;
+    z-index: 99;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 2rem;
+}
+.buttonContainer > :not(.localVideoBox) {
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-right: 10rem;
+}
+.buttonContainer svg{
+    font-size: 3rem;
+}
+
+/*Local Video in Bottom div*/
+.localVideoBox {
+    display: flex;
+    align-items: flex-end;
+}
+.meetUserVideo {
+    height: 20vh;
+    width: auto;
+    border-radius: 10px;
+    margin-left: 0;
+}
+
+/*Lobby*/
+.localVideo{
+    display: flex;
+    justify-content: center;
+}
+.localVideo > video{
+    margin-top: 2rem;
+    border-radius: 10px;
+        width: 640px !important;
+    height: 480px !important;
+}
+.connect{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/*chat box right side*/
+.chatRoom{
+    position: absolute;
+    height: 90vh;
+    width: 28vw;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border-radius: 10px;
+    padding-inline: 20px;
+    overflow: hidden;
+    z-index: 100;
+}
+.chatContainer{
+    position: relative;
+    height: 100%;
+}
+.chatingDisplay {
+    height: 65vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}
+/*Message input*/
+.chatingArea{
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+}
+.chatingArea button{
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
