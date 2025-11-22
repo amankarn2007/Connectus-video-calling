@@ -1,0 +1,7 @@
+    For Deployment
+. used render
+. use atlas db as a database
+. give the network assecc of IP. (set IP 0.0.0.0/0 )
+. firstly deploy your backend only at ( Web Services )
+. then add the backend deployed url as server
+. then agian deploy frontent as a ( Static site ).

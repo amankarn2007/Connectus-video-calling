@@ -15,9 +15,10 @@ import Badge from '@mui/material/Badge';
 import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from "react-router-dom";
+import server from "../environment";
 //import styles from "../styles/testingUI.module.css";
 
-const server_url = "http://localhost:8080";
+const server_url = server;
 
 var connections = {}; // store every room and their connected socketId
 const peerConfigConnections = { // make p2p connections between public IP's. it connect through p2p link
