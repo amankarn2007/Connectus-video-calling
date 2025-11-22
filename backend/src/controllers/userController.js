@@ -3,7 +3,6 @@ const User = require("../models/userModel.js");
 const Meeting = require("../models/meetingModel");
 const bcrypt = require("bcrypt");
 const {hash} = require("bcrypt");
-const { response } = require("express");
 const crypto = require("crypto");
 
 const login = async(req, res) => {
@@ -40,7 +39,6 @@ const register = async (req, res) => {
     try{
         const existingUser = await User.findOne({username});
         if(existingUser){
-            //return res.status(StatusCodes.FOUND).json({message: "user already exists"});
             return res.status(401).json({message: "User already exists"})
         }
 
@@ -53,7 +51,6 @@ const register = async (req, res) => {
         })
         
         await newUser.save();
-        //res.status(StatusCodes.CREATED).json({message: "user registered"});
         res.status(201).json({message: "user registerd"});
 
     } catch(error) {
@@ -63,16 +60,7 @@ const register = async (req, res) => {
 
 const getUserHistory = async(req, res) => {
     const { token } = req.query;
-
-    //try{
-    //    const user = await User.findOne({token: token});
-    //    const meetings = await Meeting.find({user_id: user.username});
-    //    res.json(meetings);
-
-    //} catch(e) {
-    //    res.json(`Something went wrong ${e}`);
-    //}
-
+    
     try {
         const user = await User.findOne({ token });
 
@@ -98,10 +86,10 @@ const addToHistory = async(req, res) => {
 
         await newMeeting.save();
 
-        res.status(201).json({message: "Added code to history"});
+        res.status(201).json({message: "Added to history"});
 
     } catch(e) {
-        res.json(`something went wrong ${e}`);
+        res.json(`something went wrong in addToHistory ${e}`);
     }
 
 }

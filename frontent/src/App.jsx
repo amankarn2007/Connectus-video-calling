@@ -1,4 +1,4 @@
-import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import LandingPage from './pages/landing' //Home page
 import Authentication from "./pages/authentication"; // Authentication page* UI
 import VideoMeetComponent from "./pages/VideoMeet"; // Video Calling page
@@ -23,18 +23,10 @@ function App(){
                     <Route path="/:url" element={<VideoMeetComponent/>} />
                 </Routes>
             </AuthProvider>
-
-
-            {/*<Router>
-                <AuthProvider>
-                    <Routes>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/auth" element={<Authentication/>} />
-                    </Routes>
-                </AuthProvider>
-            </Router>*/}
+            
         </div>
     )
 }
 
 export default App;
+//Router ke bina Routes kaam nahi karte hai, lekin hame Router main.jsx me lagana chahiye

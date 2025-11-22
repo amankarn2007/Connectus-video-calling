@@ -71,8 +71,7 @@ module.exports.connectToSocket = (server) => {
                     "data": data,
                     "socket-id-sender": socket.id
                 });
-
-                console.log("message", matchingRoom, ":", sender, data);
+                //console.log("message", matchingRoom, ":", sender, data);
 
                 connections[matchingRoom].forEach((elem) => { //send this msg in same room
                     io.to(elem).emit("chat-message", data, sender, socket.id);
@@ -81,33 +80,31 @@ module.exports.connectToSocket = (server) => {
 
         });
 
-        // When a user disconnects
         socket.on("disconnect", () => {
             var diffTime = Math.abs(timeOnline[socket.id] - new Date());// Calc online time
-            var key
 
-            for (const [k, v] of JSON.parse(JSON.stringify(Object.entries(connections)))) {
+            for (let roomId in connections) {
 
-                for (let a = 0; a < v.length; ++a) {
-                    if (v[a] === socket.id) {
-                        key = k
+                const room = connections[roomId]; // check users room who disconnected
+                const index = room.indexOf(socket.id); // idx of disconnected user
 
-                        for (let a = 0; a < connections[key].length; ++a) {
-                            io.to(connections[key][a]).emit('user-left', socket.id)
-                        }
+                if (index !== -1) {
+                    // remove user
+                    room.splice(index, 1);
 
-                        var index = connections[key].indexOf(socket.id)
-                        connections[key].splice(index, 1)
+                    // notify others
+                    room.forEach(id => {
+                        io.to(id).emit("user-left", socket.id);
+                    });
 
-                        if (connections[key].length === 0) {
-                            delete connections[key]
-                        }
+                    // empty room delete
+                    if (room.length === 0) {
+                        delete connections[roomId];
                     }
                 }
             }
             console.log(`Socket ${socket.id} disconnected after ${diffTime} ms`);
-        })
-
+        });
     })
 
     return io;

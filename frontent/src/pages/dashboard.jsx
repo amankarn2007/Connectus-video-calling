@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
 import { Button, IconButton, TextField } from '@mui/material';
@@ -9,12 +9,27 @@ function HomeComponent(){
 
     let navigate = useNavigate();
     const [meetingCode, setMeetingCode] = useState("");
+    const [loading, setLoading] = useState(false); // for multiple times join btn handle
 
     const {addToUserHistory} = useContext(AuthContext);
 
     let handleJoinVideoCall = async() => {
-        await addToUserHistory(meetingCode);
-        navigate(`/${meetingCode}`)
+        if(!meetingCode.trim()){ // validation
+            alert("please enter a meeting code");
+            return;
+        }
+
+        setLoading(true);
+
+        try{
+            await addToUserHistory(meetingCode); //save meeting code
+            navigate(`/${meetingCode}`) // redirect to meetingCode url
+        } catch(err){
+            console.log(err);
+            alert("something went wrong");
+        }
+
+        setLoading(false);
     }
 
     return(
@@ -51,7 +66,9 @@ function HomeComponent(){
                         <div style={{display: 'flex', gap: "10px", marginTop: "1rem"}}>
                             <TextField onChange={e => setMeetingCode(e.target.value)} id="outlined-basic" label="Meeting Code" variant="outlined" />
                                 
-                            <Button onClick={handleJoinVideoCall} variant='contained'>Join</Button>
+                            <Button onClick={handleJoinVideoCall} variant='contained' disabled={loading}>
+                                {loading ? "loading..." : "Join"}
+                            </Button>
                         </div>
 
                     </div>
